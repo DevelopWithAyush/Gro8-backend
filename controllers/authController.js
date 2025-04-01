@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
 import User from "../model/user.js";
 import { sendOtp } from "../services/authServices.js";
-import { sendToken } from "../utility/features.js";
+import { cookieOption, sendToken, setRoleIfOne } from "../utility/features.js";
 import { ErrorHandler, TryCatch } from "../utility/utility.js";
 
 export const handleSendOtp = TryCatch(async (req, res, next) => {
@@ -105,13 +105,24 @@ export const handleLogout = TryCatch(async (req, res, next) => {
 })
 
 export const handleGetMe = TryCatch(async (req, res, next) => {
-    res.status(200).json({
+
+    const user = await User.findById(req.user._id)
+
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+
+    if (user.role.length === 1) {
+        return setRoleIfOne(res, user)
+    }
+
+    res.status(200).clearCookie("role").json({
         success: true,
-        user: req.user
+        user: user
     })
 })
 
-export const handleSelectRole = TryCatch(async (req, res, next) => {
+export const handleSelectNewRole = TryCatch(async (req, res, next) => {
     const { role } = req.body;
     const error = validationResult(req);
     if (!error.isEmpty()) {
@@ -128,6 +139,26 @@ export const handleSelectRole = TryCatch(async (req, res, next) => {
     await User.findByIdAndUpdate(req.user._id, { role: [...req.user.role, role] });
 
     res.status(200).json({
+        success: true,
+        message: "Role selected successfully"
+    })
+})
+
+export const handleSelectRole = TryCatch(async (req, res, next) => {
+    const { role } = req.body;
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+        return next(new ErrorHandler(error.array()[0].msg, 400));
+    }
+    const user = await User.findById(req.user._id)
+    if (!user) {
+        return next(new ErrorHandler("User not found", 404));
+    }
+    if (!user.role.includes(role)) {
+        return next(new ErrorHandler("Role not found", 404));
+    }
+
+    res.status(200).clearCookie("role").cookie("role", role, cookieOption).json({
         success: true,
         message: "Role selected successfully"
     })

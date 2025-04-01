@@ -1,4 +1,4 @@
-/auth/send-otp:
+/api/v1/auth/send-otp:
   post:
     tags:
       - Authentication
@@ -46,7 +46,7 @@
       500:
         description: Failed to send OTP
 
-/auth/login:
+/api/v1/auth/login:
   post:
     tags:
       - Authentication
@@ -92,7 +92,7 @@
       500:
         description: Server error
 
-/auth/verify-otp:
+/api/v1/auth/verify-otp:
   post:
     tags:
       - Authentication
@@ -137,7 +137,7 @@
       400:
         description: Invalid OTP or OTP expired
 
-/auth/logout:
+/api/v1/auth/logout:
   get:
     tags:
       - Authentication
@@ -160,7 +160,7 @@
                   type: string
                   example: "Logged out successfully"
 
-/auth/me:
+/api/v1/auth/me:
   get:
     tags:
       - Authentication
@@ -198,7 +198,7 @@
                         enum: [MENTOR, FOUNDER, INVESTOR]
                       example: ["FOUNDER"]
 
-/auth/select-role:
+/api/v1/auth/select-new-role:
   put:
     tags:
       - Authentication

@@ -36,6 +36,13 @@ export const cookieOption = {
 };
 
 
+export const setRoleIfOne = (res, user) => {
+    return res.status(200).cookie("role", user.role[0], cookieOption).json({
+        success: true,
+        user: user
+    });
+}
+
 
 
 export const uploadFilesToCloudinary = async (files = []) => {

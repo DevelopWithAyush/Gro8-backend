@@ -11,6 +11,7 @@ import session from "express-session";
 import authRouter from "./routers/authRouter.js";
 import { swaggerDocs } from './swagger/swagger.js';
 import linkedinRouter from "./routers/linkdinRouter.js";
+import mentorRouter from "./routers/mentorRouter.js";
 import "./controllers/passport-linkedin.js";
 
 const app = express();
@@ -55,6 +56,10 @@ app.get("/", (req, res) => {
 
 app.use("/api/v1/linkedin-auth", linkedinRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/mentor", mentorRouter);
+
+
+
 app.use(errorMiddleware)
 swaggerDocs(app);
 app.listen(process.env.PORT, () => {
