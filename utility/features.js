@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { v4 as uuid } from "uuid"; // Make sure to install and import uuid
 import { v2 as cloudinary } from "cloudinary";
 import { getBase64 } from "../lib/helper.js";
+import jwt from "jsonwebtoken";
 
 
 

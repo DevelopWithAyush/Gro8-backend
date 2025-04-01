@@ -8,7 +8,7 @@ import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
 import passport from "passport";
 import session from "express-session";
-import userRouter from "./routers/userRouter.js";
+import authRouter from "./routers/authRouter.js";
 import { swaggerDocs } from './swagger/swagger.js';
 import linkedinRouter from "./routers/linkdinRouter.js";
 import "./controllers/passport-linkedin.js";
@@ -53,8 +53,8 @@ app.get("/", (req, res) => {
     </center>`);
 });
 
-app.use("/api/v1/user", userRouter);
 app.use("/api/v1/linkedin-auth", linkedinRouter);
+app.use("/api/v1/auth", authRouter);
 app.use(errorMiddleware)
 swaggerDocs(app);
 app.listen(process.env.PORT, () => {

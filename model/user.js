@@ -13,13 +13,31 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
+        select: false,
     },
     token: {
         type: String,
+        select: false,
     },
     role: {
         type: [String],
         enum: ["MENTOR", "FOUNDER","INVESTOR"],
+    },
+    otp: {
+        type: String,
+        select: false,
+    },
+    otpExpiry: {
+        type: Date,
+        select: false,
+    },
+    isPhoneNumberVerified: {
+        type: Boolean,
+        default: false,
+    },
+    isEmailVerified: {
+        type: Boolean,
+        default: false,
     },
 }, {
     timestamps: true,
