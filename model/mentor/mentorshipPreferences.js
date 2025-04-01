@@ -6,10 +6,11 @@ const mentorshipPreferencesSchema = new Schema({
         type: Types.ObjectId,
         ref: "Mentor",
         required: true,
+        unique: true,
     },
 
     howManyHoursCanYouDedicateToTheMentorshipProcessForAStartup: {
-        type: Number,
+        type: String,
         required: true,
         enum: ["16-47 Hours", "48 hours or more"]
     },

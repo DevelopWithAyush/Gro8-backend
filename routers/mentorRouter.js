@@ -4,6 +4,8 @@ import { handleCreateMentorProfile, handleGetMentorProfile } from "../controller
 import { isAuthenticated } from "../middleware/authMiddleware.js";
 import { isMentor } from "../middleware/roleMiddleware.js";
 import { handleCreateMentorExpertise, handleGetMentorExpertise } from "../controllers/mentorController/mentorExpertise.js";
+import { handleGetMentorDetails } from "../controllers/mentorController/mentorController.js";
+import { handleCreateMentorPreferences, handleGetMentorPreferences } from "../controllers/mentorController/mentorPreferences.js";
 
 
 const router = express.Router();
@@ -19,11 +21,12 @@ router.post("/onboard/expertise", isMentor, mentorExpertiseValidator(), handleCr
 router.get("/onboard/expertise", handleGetMentorExpertise)
 
 // Mentor Mentorship Preferences
-// router.post("/onboard/mentorship-preferences", mentorMentorshipPreferencesValidator(), handleCreateMentorMentorshipPreferences)
-// router.put("/onboard/mentorship-preferences", mentorMentorshipPreferencesValidator(), handleUpdateMentorMentorshipPreferences)
-// router.get("/onboard/mentorship-preferences", handleGetMentorMentorshipPreferences)
+router.post("/onboard/mentorship-preferences", mentorMentorshipPreferencesValidator(), handleCreateMentorPreferences)
+router.get("/onboard/mentorship-preferences", handleGetMentorPreferences)
 
 
+// >>>>>>>Get Mentor Details<<<<<<<<
+router.get("/details", handleGetMentorDetails)
 
 export default router;
 

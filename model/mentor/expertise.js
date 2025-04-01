@@ -5,6 +5,7 @@ const expertiseSchema = new Schema({
         type: Types.ObjectId,
         ref: "Mentor",
         required: true,
+        unique: true,
     },
     expertise: [{
         startUpName: {
