@@ -1,6 +1,11 @@
 import mongoose, { Schema, Types, model } from "mongoose";
 
 const expertiseSchema = new Schema({
+    mentorId: {
+        type: Types.ObjectId,
+        ref: "Mentor",
+        required: true,
+    },
     expertise: [{
         startUpName: {
             type: String,
@@ -15,7 +20,7 @@ const expertiseSchema = new Schema({
             required: false,
         }
     }]
-})
+})  
 
 const Expertise = model("Expertise", expertiseSchema);
 

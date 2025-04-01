@@ -2,6 +2,11 @@ import mongoose, { Schema, Types, model } from "mongoose";
 
 
 const mentorshipPreferencesSchema = new Schema({
+    mentorId: {
+        type: Types.ObjectId,
+        ref: "Mentor",
+        required: true,
+    },
 
     howManyHoursCanYouDedicateToTheMentorshipProcessForAStartup: {
         type: Number,

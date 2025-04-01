@@ -2,6 +2,11 @@ import mongoose, { Schema, Types, model } from "mongoose";
 
 
 const profileDetailsSchema = new Schema({
+    mentorId: {
+        type: Types.ObjectId,
+        ref: "Mentor",
+        required: true,
+    },
     linkedin: {
         type: Types.ObjectId,
         ref: "Linkedin",

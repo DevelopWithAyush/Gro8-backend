@@ -1,22 +1,22 @@
 import express from "express";
 import { mentorExpertiseValidator, mentorMentorshipPreferencesValidator, mentorProfileDetailsValidator } from "../middleware/express-validator/mentor-validator.js";
-import { handleCreateMentorProfile } from "../controllers/mentorController/profileDetailsController.js";
+import { handleCreateMentorProfile, handleGetMentorProfile } from "../controllers/mentorController/profileDetailsController.js";
 import { isAuthenticated } from "../middleware/authMiddleware.js";
+import { isMentor } from "../middleware/roleMiddleware.js";
+import { handleCreateMentorExpertise, handleGetMentorExpertise } from "../controllers/mentorController/mentorExpertise.js";
 
 
 const router = express.Router();
 
-
+//  >>>>>>>> Mentor Onboarding Routes <<<<<<<
 // Mentor Profile Details
 router.use(isAuthenticated);
-router.post("/onboard/profile", mentorProfileDetailsValidator(), handleCreateMentorProfile)
-// router.put("/onboard/profile", mentorProfileDetailsValidator(), handleUpdateMentorProfile)
-// router.get("/onboard/profile", handleGetMentorProfile)
+router.post("/onboard/profile", isMentor, mentorProfileDetailsValidator(), handleCreateMentorProfile)
+router.get("/onboard/profile", handleGetMentorProfile)
 
 // Mentor Expertise
-// router.post("/onboard/expertise", mentorExpertiseValidator(), handleCreateMentorExpertise)
-// router.put("/onboard/expertise", mentorExpertiseValidator(), handleUpdateMentorExpertise)
-// router.get("/onboard/expertise", handleGetMentorExpertise)
+router.post("/onboard/expertise", isMentor, mentorExpertiseValidator(), handleCreateMentorExpertise)
+router.get("/onboard/expertise", handleGetMentorExpertise)
 
 // Mentor Mentorship Preferences
 // router.post("/onboard/mentorship-preferences", mentorMentorshipPreferencesValidator(), handleCreateMentorMentorshipPreferences)
