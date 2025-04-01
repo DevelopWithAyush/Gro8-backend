@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+dotenv.config();
 import cors from "cors";
 import { errorMiddleware } from "./utility/utility.js";
 import { connectDB } from "./utility/features.js";
@@ -9,8 +10,8 @@ import passport from "passport";
 import session from "express-session";
 import userRouter from "./routers/userRouter.js";
 import { swaggerDocs } from './swagger/swagger.js';
-
-dotenv.config();
+import linkedinRouter from "./routers/linkdinRouter.js";
+import "./controllers/passport-linkedin.js";
 
 const app = express();
 connectDB(process.env.MONGO_URI);
@@ -46,11 +47,14 @@ cloudinary.config({
 });
 
 app.get("/", (req, res) => {
-    res.send("Hello World");
+    res.send(`<center style="font-size:160%"> <p>This is Home Page </p>
+    <p>User is not Logged In</p>
+    <img style="cursor:pointer;"  onclick="window.location='/api/v1/linkedin-auth/linkedin'" src="http://www.bkpandey.com/wp-content/uploads/2017/09/linkedinlogin.png"/>
+    </center>`);
 });
 
 app.use("/api/v1/user", userRouter);
-
+app.use("/api/v1/linkedin-auth", linkedinRouter);
 app.use(errorMiddleware)
 swaggerDocs(app);
 app.listen(process.env.PORT, () => {
