@@ -13,5 +13,5 @@ router.use(isAuthenticated)
 router.get("/logout", handleLogout)
 router.get("/me", handleGetMe)
 router.put("/select-new-role", roleValidator(), handleSelectNewRole)
-router.get("/select-role", roleValidator(), handleSelectRole)
+router.post("/select-role", roleValidator(), handleSelectRole)
 export default router;

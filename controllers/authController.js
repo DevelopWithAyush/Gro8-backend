@@ -116,7 +116,7 @@ export const handleGetMe = TryCatch(async (req, res, next) => {
         return setRoleIfOne(res, user)
     }
 
-    res.status(200).clearCookie("role").json({
+    res.status(200).json({
         success: true,
         user: user
     })
@@ -155,10 +155,11 @@ export const handleSelectRole = TryCatch(async (req, res, next) => {
         return next(new ErrorHandler("User not found", 404));
     }
     if (!user.role.includes(role)) {
+
         return next(new ErrorHandler("Role not found", 404));
     }
 
-    res.status(200).clearCookie("role").cookie("role", role, cookieOption).json({
+    res.status(200).cookie("role", role, cookieOption).json({
         success: true,
         message: "Role selected successfully"
     })
