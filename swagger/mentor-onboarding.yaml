@@ -1,0 +1,295 @@
+/api/v1/mentor/onboard/profile:
+  post:
+    tags:
+      - Mentor Onboarding
+    summary: Create mentor profile
+    description: Create or update mentor profile details
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - country
+              - state
+              - city
+              - gender
+              - industryPreference
+              - whatCountryyouFillingTaxReturnsIn
+            properties:
+              country:
+                type: string
+                example: "India"
+              state:
+                type: string
+                example: "Maharashtra"
+              city:
+                type: string
+                example: "Mumbai"
+              gender:
+                type: string
+                enum: ["Male", "Female", "Other"]
+                example: "Male"
+              industryPreference:
+                type: array
+                items:
+                  type: string
+                example: ["Technology", "Healthcare"]
+              whatCountryyouFillingTaxReturnsIn:
+                type: string
+                example: "India"
+    responses:
+      200:
+        description: Profile created/updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Profile details created successfully"
+                profileDetails:
+                  type: object
+      400:
+        description: Validation error
+      401:
+        description: Unauthorized
+      403:
+        description: Not a mentor
+
+  get:
+    tags:
+      - Mentor Onboarding
+    summary: Get mentor profile
+    description: Get mentor profile details
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Profile details fetched successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Profile details fetched successfully"
+                profileDetails:
+                  type: object
+      401:
+        description: Unauthorized
+      404:
+        description: Profile not found
+
+/api/v1/mentor/onboard/expertise:
+  post:
+    tags:
+      - Mentor Onboarding
+    summary: Create mentor expertise
+    description: Create or update mentor expertise details
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - expertise
+            properties:
+              expertise:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - startUpName
+                    - startUpDescription
+                  properties:
+                    startUpName:
+                      type: string
+                      example: "Tech Innovators"
+                    startUpDescription:
+                      type: string
+                      example: "A technology startup focused on AI solutions"
+                    detailsOfMentorshipOffered:
+                      type: string
+                      example: "Technical guidance and product strategy"
+    responses:
+      200:
+        description: Expertise created/updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Expertise created successfully"
+                expertise:
+                  type: object
+      400:
+        description: Validation error
+      401:
+        description: Unauthorized
+      403:
+        description: Not a mentor
+
+  get:
+    tags:
+      - Mentor Onboarding
+    summary: Get mentor expertise
+    description: Get mentor expertise details
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Expertise details fetched successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Expertise fetched successfully"
+                expertise:
+                  type: object
+      401:
+        description: Unauthorized
+      404:
+        description: Expertise not found
+
+/api/v1/mentor/onboard/mentorship-preferences:
+  post:
+    tags:
+      - Mentor Onboarding
+    summary: Create mentorship preferences
+    description: Create or update mentor's mentorship preferences
+    security:
+      - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - howManyHoursCanYouDedicateToTheMentorshipProcessForAStartup
+            properties:
+              howManyHoursCanYouDedicateToTheMentorshipProcessForAStartup:
+                type: string
+                enum: ["16-47 Hours", "48 hours or more"]
+                example: "16-47 Hours"
+              areYouInterestedIn888vcAccelerator:
+                type: boolean
+                example: true
+              whatTypeOfMentorshipServicesDoYouOfferAsAMentor:
+                type: string
+                example: "Technical and business mentorship"
+              iConfirmThatIAmReadyForAnyVerificationProcess:
+                type: boolean
+                example: true
+    responses:
+      200:
+        description: Preferences created/updated successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Mentorship preferences created successfully"
+                preferences:
+                  type: object
+      400:
+        description: Validation error
+      401:
+        description: Unauthorized
+      403:
+        description: Not a mentor
+
+  get:
+    tags:
+      - Mentor Onboarding
+    summary: Get mentorship preferences
+    description: Get mentor's mentorship preferences
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Preferences fetched successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Mentorship preferences fetched successfully"
+                preferences:
+                  type: object
+      401:
+        description: Unauthorized
+      404:
+        description: Preferences not found
+
+/api/v1/mentor/details:
+  get:
+    tags:
+      - Mentor
+    summary: Get mentor details
+    description: Get complete mentor profile including all details
+    security:
+      - BearerAuth: []
+    responses:
+      200:
+        description: Mentor details fetched successfully
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                success:
+                  type: boolean
+                  example: true
+                message:
+                  type: string
+                  example: "Mentor details fetched successfully"
+                mentor:
+                  type: object
+                  properties:
+                    profileDetails:
+                      type: object
+                    expertise:
+                      type: object
+                    mentorshipPreferences:
+                      type: object
+      401:
+        description: Unauthorized
+      404:
+        description: Mentor not found

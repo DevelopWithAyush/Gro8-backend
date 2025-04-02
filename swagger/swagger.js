@@ -12,11 +12,11 @@ const options = {
         info: {
             title: 'API Documentation',
             version: '1.0.0',
-            description: 'API documentation for Authentication and LinkedIn OAuth integration',
+            description: 'API documentation for Authentication and Mentor Onboarding',
         },
         servers: [
             {
-                url: 'http://localhost:5000',
+                url: process.env.BASE_URL,
                 description: 'Development server',
             },
         ],
@@ -62,7 +62,9 @@ const options = {
             },
         },
     },
-    apis: [join(__dirname, './**/*.yaml')], // Path to API docs
+    apis: [
+        join(__dirname, './**/*.yaml')
+    ],
 };
 
 const swaggerSpec = swaggerJsdoc(options);

@@ -21,7 +21,7 @@ router.post("/onboard/expertise", isMentor, mentorExpertiseValidator(), handleCr
 router.get("/onboard/expertise", handleGetMentorExpertise)
 
 // Mentor Mentorship Preferences
-router.post("/onboard/mentorship-preferences", mentorMentorshipPreferencesValidator(), handleCreateMentorPreferences)
+router.post("/onboard/mentorship-preferences", isMentor, mentorMentorshipPreferencesValidator(), handleCreateMentorPreferences)
 router.get("/onboard/mentorship-preferences", handleGetMentorPreferences)
 
 
