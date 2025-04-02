@@ -10,15 +10,15 @@ import passport from "passport";
 import session from "express-session";
 import authRouter from "./routers/authRouter.js";
 import { swaggerDocs } from './swagger/swagger.js';
-import linkedinRouter from "./routers/linkdinRouter.js";
+import linkedinRouter from "./routers/linkedinRouter.js";
 import mentorRouter from "./routers/mentorRouter.js";
-import "./controllers/passport-linkedin.js";
+
 
 const app = express();
 connectDB(process.env.MONGO_URI);
 
 app.use(cors({
-    origin: ["http://localhost:3000", "http://127.0.0.1:5500", process.env.FRONTEND_URL],
+    origin: ["http://localhost:3000", "http://127.0.0.1:5500", process.env.FRONTEND_URL,"http://localhost:5173"],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
@@ -47,12 +47,7 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-app.get("/", (req, res) => {
-    res.send(`<center style="font-size:160%"> <p>This is Home Page </p>
-    <p>User is not Logged In</p>
-    <img style="cursor:pointer;"  onclick="window.location='/api/v1/linkedin-auth/linkedin'" src="http://www.bkpandey.com/wp-content/uploads/2017/09/linkedinlogin.png"/>
-    </center>`);
-});
+
 
 app.use("/api/v1/linkedin-auth", linkedinRouter);
 app.use("/api/v1/auth", authRouter);

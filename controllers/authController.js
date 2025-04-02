@@ -106,7 +106,9 @@ export const handleLogout = TryCatch(async (req, res, next) => {
 
 export const handleGetMe = TryCatch(async (req, res, next) => {
 
-    const user = await User.findById(req.user._id)
+    const user = await User.findById(req.user._id).populate("linkedin");
+
+    
 
     if (!user) {
         return next(new ErrorHandler("User not found", 404));

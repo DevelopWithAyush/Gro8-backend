@@ -9,7 +9,6 @@ const userSchema = new Schema({
     },
     phoneNumber: {
         type: String,
-        required: true,
     },
     password: {
         type: String,
@@ -39,10 +38,15 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    linkedin: {
+        type: Types.ObjectId,
+        ref: "Linkedin",
+    },
+ 
 }, {
     timestamps: true,
 })
 
 const User = model("User", userSchema);
 
-export default User;
+export default User;    
