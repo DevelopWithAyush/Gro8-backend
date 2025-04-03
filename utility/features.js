@@ -34,7 +34,7 @@ export const cookieOption = {
     httpOnly: true,
     secure: false,
     path: "/",
-    domain: "localhost",
+    domain: ["localhost", "https://gro8-backend.onrender.com"],
 };
 
 
