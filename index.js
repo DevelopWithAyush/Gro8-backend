@@ -1,17 +1,15 @@
-import express from "express";
-import dotenv from "dotenv";
-dotenv.config();
-import cors from "cors";
-import { errorMiddleware } from "./utility/utility.js";
-import { connectDB } from "./utility/features.js";
-import cookieParser from "cookie-parser";
 import { v2 as cloudinary } from "cloudinary";
-import passport from "passport";
-import session from "express-session";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import dotenv from "dotenv";
+import express from "express";
 import authRouter from "./routers/authRouter.js";
-import { swaggerDocs } from './swagger/swagger.js';
 import linkedinRouter from "./routers/linkedinRouter.js";
 import mentorRouter from "./routers/mentorRouter.js";
+import { swaggerDocs } from './swagger/swagger.js';
+import { connectDB } from "./utility/features.js";
+import { errorMiddleware } from "./utility/utility.js";
+dotenv.config();
 
 
 const app = express();
@@ -22,7 +20,6 @@ app.use(cors({
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-   
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -30,8 +27,7 @@ app.use(cookieParser());
 
 
 
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
