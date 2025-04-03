@@ -1,6 +1,6 @@
 import express, { application } from "express";
 import { loginValidator, roleValidator, sendOtpValidator, verifyOtpValidator } from "../middleware/express-validator/auth-validator.js";
-import { handleGetMe, handleLogin, handleLogout, handleSelectNewRole, handleSelectRole, handleSendOtp, handleVerifyOtp } from "../controllers/authcontroller.js";
+import { handleGetMe, handleLogin, handleLogout, handleSelectNewRole, handleSelectRole, handleSendOtp, handleVerifyOtp } from "../controllers/authController.js";
 import { isAuthenticated } from "../middleware/authMiddleware.js";
 
 

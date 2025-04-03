@@ -4,6 +4,7 @@ import User from "../model/user.js";
 import { sendOtp } from "../services/authServices.js";
 import { cookieOption, sendToken, setRoleIfOne } from "../utility/features.js";
 import { ErrorHandler, TryCatch } from "../utility/utility.js";
+import jwt from 'jsonwebtoken';
 
 export const handleSendOtp = TryCatch(async (req, res, next) => {
     const { email, phoneNumber, password } = req.body;
@@ -108,7 +109,7 @@ export const handleGetMe = TryCatch(async (req, res, next) => {
 
     const user = await User.findById(req.user._id).populate("linkedin");
 
-    
+
 
     if (!user) {
         return next(new ErrorHandler("User not found", 404));
@@ -166,3 +167,60 @@ export const handleSelectRole = TryCatch(async (req, res, next) => {
         message: "Role selected successfully"
     })
 })
+
+// Register a new user
+export const register = async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+
+        // Add your registration logic here
+        // Example: Check if user exists, hash password, save user to database
+
+        return res.status(201).json({
+            success: true,
+            message: 'User registered successfully'
+        });
+    } catch (error) {
+        console.error('Registration error:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
+};
+
+// Login user
+export const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        // Add your login logic here
+        // Example: Verify credentials, generate JWT token
+
+        return res.status(200).json({
+            success: true,
+            message: 'Login successful',
+            // token: generatedToken
+        });
+    } catch (error) {
+        console.error('Login error:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Internal server error'
+        });
+    }
+};
+
+// Verify user authentication middleware
+export const authenticate = async (req, res, next) => {
+    try {
+        // JWT verification logic
+        // Set req.user if authenticated
+        next();
+    } catch (error) {
+        return res.status(401).json({
+            success: false,
+            message: 'Authentication failed'
+        });
+    }
+};

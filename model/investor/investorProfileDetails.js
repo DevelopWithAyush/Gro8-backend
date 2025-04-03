@@ -1,16 +1,15 @@
 import mongoose, { Schema, Types, model } from "mongoose";
 
 
-const profileDetailsSchema = new Schema({
-    mentorId: {
+const investorProfileDetailsSchema = new Schema({
+    investorId: {
         type: Types.ObjectId,
-        ref: "Mentor",
+        ref: "Investor",
         required: true,
     },
     linkedin: {
         type: Types.ObjectId,
         ref: "Linkedin",
-        
     },
     country: {
         type: String,
@@ -24,26 +23,21 @@ const profileDetailsSchema = new Schema({
         type: String,
         required: true,
     },
-    gender: {
-        type: String,
+    industryPreference:{
+        type: [String],
         required: true,
-        enum: ["Male", "Female", "Other"],
+        
     },
-    industryPreference: {
+    taxCountry:{
         type: [String],
         required: true,
     },
-    whatCountryyouFillingTaxReturnsIn: {
-        type: String,
-        required: true,
-    },
    
-    
 }, {
-    timestamps:true
-})
+    timestamps: true,
+});
 
+const InvestorProfileDetails = model("InvestorProfileDetails", investorProfileDetailsSchema);
 
-const ProfileDetails = model("ProfileDetails", profileDetailsSchema);
+export default InvestorProfileDetails;
 
-export default ProfileDetails;

@@ -32,9 +32,9 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: false,
+        secure: process.env.NODE_ENV === "development" ? false : true,
         maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: true
+        httpOnly: process.env.NODE_ENV === "development" ? false : true
     }
 }));
 
@@ -52,6 +52,7 @@ cloudinary.config({
 app.use("/api/v1/linkedin-auth", linkedinRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/mentor", mentorRouter);
+
 
 
 

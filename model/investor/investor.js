@@ -12,6 +12,20 @@ const investorSchema = new Schema({
         enum: ["International", "Indian", "NRI"],
         required: true
     },
+    profileDetails: {
+        type: Types.ObjectId,
+        ref: "InvestorProfileDetails",
+    },
+    globalInvestor: {
+        type: Types.ObjectId,
+        ref: "GlobalInvestor",
+    },
+    isVerified: {
+        type: String,
+        enum: ["pending", "approved", "rejected"],
+        default: "pending",
+    },
+    
     
    
 })
