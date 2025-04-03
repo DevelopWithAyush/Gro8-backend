@@ -1,8 +1,7 @@
 import express, { application } from "express";
 import { loginValidator, roleValidator, sendOtpValidator, verifyOtpValidator } from "../middleware/express-validator/auth-validator.js";
-import { handleGetMe, handleLogin, handleLogout, handleSelectNewRole, handleSelectRole, handleSendOtp, handleVerifyOtp } from "../controllers/authController.js";
 import { isAuthenticated } from "../middleware/authMiddleware.js";
-
+import { handleGetMe, handleLogin, handleLogout, handleSelectNewRole, handleSelectRole, handleSendOtp, handleVerifyOtp } from "../controllers/authController.js";
 
 const router = express.Router();
 
