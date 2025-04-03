@@ -18,7 +18,7 @@ const app = express();
 connectDB(process.env.MONGO_URI);
 
 app.use(cors({
-    origin: ['http://localhost:3000', process.env.FRONTEND_URL, process.env.BASE_URL],
+    origin: ['http://localhost:3000', process.env.FRONTEND_URL,process.env.BASE_URL],
     credentials: true
 }));
 app.use(express.json());
