@@ -30,9 +30,7 @@ export const sendToken = (res, user, code, message) => {
 
 export const cookieOption = {
     maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
-    sameSite: "lax",  // Allows Swagger and frontend requests
-    httpOnly: true,    // Prevents client-side JavaScript access
-    secure: false,     // Must be false because localhost is HTTP
+       // Must be false because localhost is HTTP
    
 };
 
