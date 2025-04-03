@@ -29,12 +29,12 @@ export const sendToken = (res, user, code, message) => {
 };
 
 export const cookieOption = {
-    maxAge: 15 * 24 * 60 * 60 * 1000,
-    sameSite: "none",
-    httpOnly: true,
-    secure: false,
+    maxAge: 15 * 24 * 60 * 60 * 1000, // 15 days
+    sameSite: "lax",  // Allows Swagger and frontend requests
+    httpOnly: true,    // Prevents client-side JavaScript access
+    secure: false,     // Must be false because localhost is HTTP
     path: "/",
-    domain: ["localhost", "https://gro8-backend.onrender.com"],
+    domain: undefined, // Don't set a domain (let the browser handle it)
 };
 
 
