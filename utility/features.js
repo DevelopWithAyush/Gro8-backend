@@ -33,8 +33,7 @@ export const cookieOption = {
     sameSite: "lax",  // Allows Swagger and frontend requests
     httpOnly: true,    // Prevents client-side JavaScript access
     secure: false,     // Must be false because localhost is HTTP
-    path: "/",
-    domain: undefined, // Don't set a domain (let the browser handle it)
+   
 };
 
 
