@@ -30,10 +30,11 @@ export const sendToken = (res, user, code, message) => {
 
 export const cookieOption = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'none',
+    secure: true,
+    sameSite: 'none',
     maxAge: 24 * 60 * 60 * 1000,
-    path: '/'
+    path: '/',
+    domain: 'localhost'
 };
 
 
