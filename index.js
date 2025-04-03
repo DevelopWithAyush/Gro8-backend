@@ -18,7 +18,7 @@ const app = express();
 connectDB(process.env.MONGO_URI);
 
 app.use(cors({
-    origin: ['http://localhost:3000',"http://localhost:5173", process.env.FRONTEND_URL, process.env.BASE_URL],
+    origin: ['http://localhost:3000', 'http://localhost:5173', process.env.FRONTEND_URL, process.env.BASE_URL],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH']
 }));
@@ -31,9 +31,10 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        secure: process.env.NODE_ENV === "development" ? false : true,
+        secure: false,
         maxAge: 24 * 60 * 60 * 1000,
-        httpOnly: process.env.NODE_ENV === "development" ? false : true
+        httpOnly: true,
+        sameSite: 'lax'
     }
 }));
 
